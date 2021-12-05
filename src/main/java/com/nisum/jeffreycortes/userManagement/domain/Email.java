@@ -1,18 +1,25 @@
 package com.nisum.jeffreycortes.userManagement.domain;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Email {
-    private String Value;
-    private String RegularExpressionFormat = "aa";
+    private String value;
+    final Pattern EMAIL_FORMAT_REGEX = Pattern.compile("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", Pattern.CASE_INSENSITIVE);
 
     public Email(String value) {
-        Value = value;
+        if(!isValid(value))
+            throw new InvalidEmailException();
+
+        this.value = value;
     }
 
     public String getValue() {
-        return Value;
+        return value;
     }
 
-    boolean isValid() {
-        return false;
+    private boolean isValid(String email) {
+        Matcher matcher = EMAIL_FORMAT_REGEX.matcher(email);
+        return matcher.find();
     }
 }
