@@ -1,6 +1,22 @@
 # spring-boot-user-management
-Esta solución consta de un microservicio que sirve un APIREST para la administración de usuarios, incialmente con el caso de uso de **crear usuario**
+Esta solución consta de un microservicio que sirve un APIREST para la administración de usuarios, inicialmente con el caso de uso **crear usuario**.
 
+El proyecto se encuentra estructurado con arquitectura hexagonal y DDD, teniendo como capas las siguientes:
+1. Infrastructure: Alverga los controladores y el manejador de excepciones global del API.
+2. Aplication: Contiene los servicios que encapsulan los casos de uso y los DTOS tanto de entrada como de salida.
+3. Domain: Es la capa principal de la solución y es en dónde están:
+   1. Entidades
+   2. Value objects
+   3. Validadores
+   4. servicios de dominio
+   5. Convertidores de atributos
+   6. Contratos de repositorios
+   7. Excepciones de dominio
+   8. Dto de excepcion de respuesta
+## Recursos extras
+   El proyecto contiene 2 carpetas extras: 
+   1. *postman_collection*: Contiene una colección de postman con los endpoints del API de users y ejemplos del body para el caso de uso de *Crear Usuario*
+   3. *diagrama_solucion*: Contiene el diagrama de flujo de la petición, la relación de las capas y el manejo de excepciones.
 ## Pre-Requisitos de software
 * Java SDK 1.8 o Java 1.8
 * Maven
