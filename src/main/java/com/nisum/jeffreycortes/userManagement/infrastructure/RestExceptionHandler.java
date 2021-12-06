@@ -2,10 +2,10 @@ package com.nisum.jeffreycortes.userManagement.infrastructure;
 
 import com.nisum.jeffreycortes.userManagement.domain.ExceptionResponse;
 import com.nisum.jeffreycortes.userManagement.domain.InvalidEmailException;
+import com.nisum.jeffreycortes.userManagement.domain.InvalidPasswordException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -25,6 +25,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler
     protected ResponseEntity<ExceptionResponse> handleException(InvalidEmailException ex) {
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+        return buildResponseEntity(httpStatus, ex);
+    }
+
+    @ExceptionHandler
+    protected ResponseEntity<ExceptionResponse> handleException(InvalidPasswordException ex) {
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
         return buildResponseEntity(httpStatus, ex);
     }
