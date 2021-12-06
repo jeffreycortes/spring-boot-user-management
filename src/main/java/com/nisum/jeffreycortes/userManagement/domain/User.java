@@ -38,7 +38,8 @@ public class User {
     private Instant lastLogin;
     @ColumnDefault("true")
     private Boolean isActive = true;
-    @ColumnDefault("54321")
+    @Lob
+    @Column
     private String token;
 
     @NotNull(message = "Es necesario un teléfono de contacto")
