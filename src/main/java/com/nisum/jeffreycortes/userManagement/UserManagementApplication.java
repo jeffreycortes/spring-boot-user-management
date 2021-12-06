@@ -15,9 +15,9 @@ public class UserManagementApplication {
 		SpringApplication.run(UserManagementApplication.class, args);
 	}
 
-	@GetMapping
+	@GetMapping(produces="application/json")
 	public String hello() {
-		return "Hello world";
+		return "{\"message\":\"Hola, microservicio de UserManagement funcionando ;)\"}";
 	}
 
 }
