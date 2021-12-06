@@ -1,0 +1,56 @@
+{
+	"info": {
+		"_postman_id": "2a5a809c-3c57-4406-90ec-846bc3302458",
+		"name": "SpringBoot - UserManagement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Jeffrey Cortes\",\r\n    \"email\": \"cortesj3f@gmail.com\",\r\n    \"password\": \"B12E4$g78*\",\r\n    \"phones\": [\r\n        {\r\n            \"number\": null,\r\n            \"citycode\": 1,\r\n            \"countrycode\": 57\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
