@@ -3,6 +3,8 @@ package com.nisum.jeffreycortes.userManagement.aplication.services;
 import com.nisum.jeffreycortes.userManagement.aplication.dtos.UserCreatedResponse;
 import com.nisum.jeffreycortes.userManagement.aplication.dtos.UserRequestCreateDto;
 import com.nisum.jeffreycortes.userManagement.domain.*;
+import com.nisum.jeffreycortes.userManagement.domain.services.JwtManagerService;
+import com.nisum.jeffreycortes.userManagement.domain.services.PasswordEncoderService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -14,6 +16,12 @@ import java.util.List;
 public class UserService {
     @Autowired
     private PasswordPolicyValidator passwordPolicyValidator;
+
+    @Autowired
+    private PasswordEncoderService passwordEncoderService;
+
+    @Autowired
+    private JwtManagerService jwtManagerService;
 
     private final UserRepository _userRepository;
 
@@ -32,6 +40,8 @@ public class UserService {
 
         ModelMapper modelMapper = new ModelMapper();
         User user = modelMapper.map(userDto, User.class);
+        user.setPassword(passwordEncoderService.encode(userDto.getPassword()));
+        user.setToken(jwtManagerService.generateToken(user.getName()));
 
         return modelMapper.map(_userRepository.save(user), UserCreatedResponse.class);
     }
