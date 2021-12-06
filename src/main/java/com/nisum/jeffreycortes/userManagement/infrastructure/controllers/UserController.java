@@ -24,6 +24,6 @@ public class UserController {
 
     @PostMapping
     public UserCreatedResponse createUser(@Valid @RequestBody UserRequestCreateDto userDto, BindingResult result) {
-        return userService.Create(userDto);
+        return userService.create(userDto);
     }
 }

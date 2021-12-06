@@ -6,6 +6,7 @@ import com.nisum.jeffreycortes.userManagement.domain.Email;
 import com.nisum.jeffreycortes.userManagement.domain.User;
 import com.nisum.jeffreycortes.userManagement.domain.UserRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,10 +19,10 @@ public class UserService {
         _userRepository = userRepository;
     }
 
-    public UserCreatedResponse Create(UserRequestCreateDto userDto) throws Exception {
+    public UserCreatedResponse create(UserRequestCreateDto userDto) {
         User userResult = _userRepository.findUserByEmail(new Email(userDto.getEmail()));
         if (userResult != null)
-           throw new Exception("Usuario registrado");
+           throw new DuplicateKeyException("El correo ya se encuentra registrado");
 
         ModelMapper modelMapper = new ModelMapper();
         User user = modelMapper.map(userDto, User.class);
