@@ -7,6 +7,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +22,9 @@ public class User {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     String id;
+    @NotNull(message = "El nombre del usuario es obligatorio")
+    @NotEmpty(message = "El nombre del usuario no puede ser vacío")
+    @NotBlank(message = "El nombre del usuario no puede ser vacío")
     @Column
     String name = null;
     @Convert(converter = EmailAttributeConverter.class)
@@ -36,6 +42,8 @@ public class User {
     @ColumnDefault("54321")
     private String token;
 
+    @NotNull(message = "Es necesario un teléfono de contacto")
+    @NotEmpty(message = "Es necesario un teléfono de contacto")
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     Set<Phone> phones;
