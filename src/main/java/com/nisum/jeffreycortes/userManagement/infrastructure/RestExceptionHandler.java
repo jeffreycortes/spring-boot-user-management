@@ -38,8 +38,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler
     protected ResponseEntity<ExceptionResponse> handleException(ConstraintViolationException ex) {
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
-        Set<ConstraintViolation<?>> a = ex.getConstraintViolations();
-        Set<String> errors = a.stream().map(ConstraintViolation::getMessage).collect(Collectors.toSet());
+        Set<ConstraintViolation<?>> constraintViolations = ex.getConstraintViolations();
+        Set<String> errors = constraintViolations.stream().map(ConstraintViolation::getMessage).collect(Collectors.toSet());
         String message = String.join(" + ", errors);
         return buildResponseEntity(httpStatus, new RuntimeException(message));
     }
