@@ -8,7 +8,7 @@ public class Email {
     final Pattern EMAIL_FORMAT_REGEX = Pattern.compile("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", Pattern.CASE_INSENSITIVE);
 
     public Email(String value) {
-        if(!isValid(value))
+        if(value == null || !isValid(value))
             throw new InvalidEmailException();
 
         this.value = value;
